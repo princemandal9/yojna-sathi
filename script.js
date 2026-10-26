@@ -1,6 +1,6 @@
 const HELP = "1800-000-0000"; // PLACEHOLDER – replace with the real official helpline
 
-const schemes = [
+var schemes = [
  {id:"svmcm",name:"Swami Vivekananda Merit-cum-Means (SVMCM)",short:"SVMCM",dept:"Dept. of Higher Education, Govt. of West Bengal",icon:"award",color:"bg-blue-600",
   status:"open",window:"Typically Aug – Nov (yearly)",deadline:"Check portal – usually early Nov",elig:"West Bengal resident student, merit + family income limit",mode:"Online",helpline:HELP,
   docs:[["Aadhaar card","m"],["Madhyamik / Class 10 admit card or marksheet","m"],["Last qualifying exam marksheet","m"],["Income certificate / self-declaration","m"],["Residential proof","m"],["Bank passbook (first page)","m"],["Passport size photo & signature","m"],["Caste certificate (SC/ST/OBC)","o"],["Birth certificate","o"],["Disability certificate (if applicable)","o"]]},
@@ -15,11 +15,16 @@ const schemes = [
   docs:[["Aadhaar card","m"],["Caste certificate","m"],["Income certificate","m"],["Previous marksheet","m"],["Bank passbook (first page)","m"],["Admission receipt / fee receipt","m"],["Residential proof","o"],["Birth certificate","o"]]}
 ];
 
-const statusUI = {
+var statusUI = {
   open:["Applications Open","bg-emerald-100 text-emerald-700"],
   closing:["Closing Soon","bg-amber-100 text-amber-700"],
   soon:["Opens Soon","bg-blue-100 text-blue-700"]
 };
+
+if (typeof window !== "undefined") {
+  window.schemes = schemes;
+  window.statusUI = statusUI;
+}
 
 // Alternatives knowledge base for the assistant
 const kb = [
@@ -34,11 +39,24 @@ const kb = [
  {k:["disab"],t:"Disability certificate",a:"This is only needed if you claim the disability benefit. If you don’t have it, you can skip it, or contact the helpline.",call:true}
 ];
 
-let cur = null, checked = {};
+var cur = null, checked = {};
 
 function showHome(){
   home.classList.remove("hidden");
   detail.classList.add("hidden");
+  const vaultView = document.getElementById("vault");
+  if(vaultView) vaultView.classList.add("hidden");
+  window.scrollTo(0,0);
+}
+
+function showVault(){
+  home.classList.add("hidden");
+  detail.classList.add("hidden");
+  const vaultView = document.getElementById("vault");
+  if(vaultView){
+    vaultView.classList.remove("hidden");
+    if(typeof renderVault === "function") renderVault();
+  }
   window.scrollTo(0,0);
 }
 
@@ -62,7 +80,13 @@ function renderHome(){
 
 function openScheme(id){
   cur = schemes.find(s=>s.id===id); checked = {};
-  home.classList.add("hidden"); detail.classList.remove("hidden"); window.scrollTo(0,0);
+  if (typeof window !== "undefined") window.cur = cur;
+  home.classList.add("hidden");
+  detail.classList.remove("hidden");
+  const vaultView = document.getElementById("vault");
+  if(vaultView) vaultView.classList.add("hidden");
+  window.scrollTo(0,0);
+
   dLogo.className = `w-14 h-14 rounded-2xl grid place-items-center text-white shrink-0 ${cur.color}`;
   dLogo.innerHTML = `<i data-lucide="${cur.icon}" class="w-7 h-7"></i>`;
   dName.textContent = cur.name; dDept.textContent = cur.dept;
@@ -72,18 +96,34 @@ function openScheme(id){
   dElig.textContent = cur.elig; dMode.textContent = cur.mode;
   dHelp.textContent = cur.helpline; dHelp.href = "tel:" + cur.helpline.replace(/-/g,"");
 
-  const li = (d,i)=>`<li class="flex items-center gap-3 rounded-xl border border-slate-200 p-3" id="row${i}">
-    <input type="checkbox" id="c${i}" class="w-5 h-5 accent-emerald-600" onchange="tick(${i},this.checked)">
-    <label for="c${i}" class="flex-1 text-sm font-medium cursor-pointer">${d[0]}</label>
-    <button onclick="askAbout('${d[0].replace(/'/g,"")}')" class="text-xs text-blue-700 font-semibold hover:underline whitespace-nowrap">Don’t have it?</button></li>`;
+  const li = (d,i)=>{
+    // Automatically pre-tick if this document exists in the student's Digital Vault
+    const inVault = typeof hasVaultDocument === "function" && hasVaultDocument(d[0]);
+    if (inVault) {
+      checked[i] = true;
+    }
+    const isChecked = !!checked[i];
+
+    return `<li class="flex items-center gap-3 rounded-xl border ${isChecked ? "border-emerald-300 bg-emerald-50" : "border-slate-200"} p-3 transition" id="row${i}">
+      <input type="checkbox" id="c${i}" ${isChecked ? "checked" : ""} class="w-5 h-5 accent-emerald-600 cursor-pointer" onchange="tick(${i},this.checked)">
+      <div class="flex-1 flex flex-wrap items-center gap-2">
+        <label for="c${i}" class="text-sm font-medium cursor-pointer">${d[0]}</label>
+        ${inVault ? `<span class="inline-flex items-center gap-1 text-[11px] font-semibold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full"><i data-lucide="shield-check" class="w-3 h-3 text-emerald-600"></i> In Vault</span>` : ""}
+      </div>
+      <button onclick="askAbout('${d[0].replace(/'/g,"")}')" class="text-xs text-blue-700 font-semibold hover:underline whitespace-nowrap">Don’t have it?</button></li>`;
+  };
+
   mList.innerHTML = cur.docs.map((d,i)=>d[1]==="m"?li(d,i):"").join("");
   oList.innerHTML = cur.docs.map((d,i)=>d[1]==="o"?li(d,i):"").join("");
-  startMsg.classList.add("hidden"); updateAudit(); resetChat(); lucide.createIcons();
+  startMsg.classList.add("hidden");
+  updateAudit();
+  resetChat();
+  lucide.createIcons();
 }
 
 function tick(i,v){
   checked[i] = v;
-  document.getElementById("row"+i).className = "flex items-center gap-3 rounded-xl border p-3 " + (v ? "border-emerald-300 bg-emerald-50" : "border-slate-200");
+  document.getElementById("row"+i).className = "flex items-center gap-3 rounded-xl border p-3 transition " + (v ? "border-emerald-300 bg-emerald-50" : "border-slate-200");
   updateAudit();
 }
 
@@ -129,7 +169,7 @@ function resetChat(){
   chat.innerHTML = "";
   bot("Hi! 👋 Tell me which document you <b>don’t have</b> and I’ll suggest what to use instead.");
   chips.innerHTML = ["Birth certificate","Income certificate","Caste certificate","Bank passbook"]
-    .map(c=>`<button onclick="askAbout('${c}')" class="text-xs border border-slate-300 rounded-full px-3 py-1 hover:bg-slate-50">${c}</button>`).join("");
+    .map(c=>`<button onclick="askAbout('${c}')" class="text-xs border border-slate-300 rounded-full px-3 py-1 hover:bg-slate-50 transition">${c}</button>`).join("");
 }
 function askAbout(d){ me("I don’t have: " + d); reply(d); }
 function sendChat(e){
@@ -169,11 +209,13 @@ function compress(f){
       const size = n=>(n/1024).toFixed(0) + " KB";
       cOut.classList.remove("hidden");
       cOut.innerHTML = `<p class="rounded-lg bg-emerald-50 text-emerald-800 p-3">${size(f.size)} → <b>${size(b.size)}</b> (${Math.max(0,Math.round((1-b.size/f.size)*100))}% smaller)</p>
-      <a href="${url}" download="compressed.jpg" class="mt-2 block text-center bg-blue-600 text-white rounded-lg py-2 font-semibold">Download</a>`;
+      <a href="${url}" download="compressed.jpg" class="mt-2 block text-center bg-blue-600 text-white rounded-lg py-2 font-semibold transition hover:bg-blue-700">Download</a>`;
     }, "image/jpeg", q.value/100);
   };
   img.src = URL.createObjectURL(f);
 }
 
-renderHome();
-lucide.createIcons();
+if (typeof document !== "undefined") {
+  renderHome();
+  lucide.createIcons();
+}
