@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScholarSync – West Bengal Scholarships, Ready Before You Apply</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:p-3 focus:bg-white">Skip to content</a>
+
+<!-- HEADER -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <button onclick="showHome()" class="flex items-center gap-2 font-bold text-lg text-blue-700">
+      <span class="w-9 h-9 rounded-xl bg-blue-600 text-white grid place-items-center"><i data-lucide="graduation-cap" class="w-5 h-5"></i></span>
+      ScholarSync
+    </button>
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+      <button onclick="showHome()" class="hover:text-blue-700">Schemes</button>
+      <a href="#tools" class="hover:text-blue-700">Tools</a>
+      <a href="#help" class="hover:text-blue-700">Helpline</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <span class="hidden sm:inline text-xs bg-slate-100 rounded-full px-3 py-1">EN | বাং</span>
+      <button class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg px-4 py-2">Sign in</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="max-w-6xl mx-auto px-4 py-8">
+
+  <!-- HOME VIEW -->
+  <section id="home" class="fade">
+    <div class="rounded-3xl bg-gradient-to-br from-blue-600 to-blue-800 text-white p-6 sm:p-10 mb-8">
+      <p class="inline-flex items-center gap-2 text-xs bg-white/15 rounded-full px-3 py-1 mb-4"><i data-lucide="shield-check" class="w-4 h-4"></i> No more mid-form surprises</p>
+      <h1 class="text-3xl sm:text-4xl font-bold leading-tight max-w-2xl">Know every document you need <span class="text-emerald-300">before</span> you start applying.</h1>
+      <p class="mt-3 text-blue-100 max-w-xl">Browse government schemes, check eligibility, run a readiness audit, and get AI help if a document is missing.</p>
+    </div>
+
+    <div class="flex items-end justify-between mb-4">
+      <h2 class="text-xl font-bold">Government Schemes</h2>
+      <p class="text-xs text-slate-500">Dates are typical windows – always confirm on the official portal.</p>
+    </div>
+    <div id="schemeGrid" class="grid sm:grid-cols-2 gap-5"></div>
+  </section>
+
+  <!-- DETAIL VIEW -->
+  <section id="detail" class="hidden fade">
+    <button onclick="showHome()" class="flex items-center gap-1 text-sm text-blue-700 font-medium mb-4"><i data-lucide="arrow-left" class="w-4 h-4"></i> All schemes</button>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 space-y-6">
+
+        <!-- Overview -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+          <div class="flex items-start gap-4">
+            <div id="dLogo" class="w-14 h-14 rounded-2xl grid place-items-center text-white shrink-0"></div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <h2 id="dName" class="text-2xl font-bold"></h2>
+                <span id="dStatus" class="text-xs font-semibold rounded-full px-3 py-1"></span>
+              </div>
+              <p id="dDept" class="text-sm text-slate-500 mt-1"></p>
+            </div>
+          </div>
+          <dl class="grid sm:grid-cols-2 gap-3 mt-5 text-sm">
+            <div class="bg-slate-50 rounded-xl p-4"><dt class="text-slate-500 flex items-center gap-2"><i data-lucide="calendar" class="w-4 h-4"></i>Typical application window</dt><dd id="dWindow" class="font-semibold mt-1"></dd></div>
+            <div class="bg-slate-50 rounded-xl p-4"><dt class="text-slate-500 flex items-center gap-2"><i data-lucide="alarm-clock" class="w-4 h-4"></i>Deadline</dt><dd id="dDeadline" class="font-semibold mt-1"></dd></div>
+            <div class="bg-slate-50 rounded-xl p-4"><dt class="text-slate-500 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4"></i>Eligibility</dt><dd id="dElig" class="font-semibold mt-1"></dd></div>
+            <div class="bg-slate-50 rounded-xl p-4"><dt class="text-slate-500 flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4"></i>Mode of application</dt><dd id="dMode" class="font-semibold mt-1"></dd></div>
+          </dl>
+        </div>
+
+        <!-- Pre-flight -->
+        <div class="bg-white rounded-2xl border-2 border-blue-200 p-6">
+          <div class="flex items-center gap-2 mb-1"><i data-lucide="plane-takeoff" class="w-5 h-5 text-blue-600"></i><h3 class="text-lg font-bold">Pre-Flight Document Checklist</h3></div>
+          <p class="text-sm text-slate-500 mb-4">Tick what you already have ready (scanned and under size limit). Missing something? Tap <b>“Don’t have it?”</b>.</p>
+
+          <div class="flex items-center justify-between text-sm mb-1">
+            <span class="font-semibold">Readiness audit</span><span id="pText" class="font-semibold text-slate-600">0%</span>
+          </div>
+          <div class="h-3 rounded-full bg-slate-100 overflow-hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="pBar" aria-valuenow="0">
+            <div id="pFill" class="h-full bg-amber-400 transition-all duration-500" style="width:0%"></div>
+          </div>
+          <p id="pMsg" class="text-sm mt-2 text-slate-600"></p>
+
+          <h4 class="mt-5 mb-2 text-xs font-bold uppercase tracking-wide text-rose-600 flex items-center gap-1"><i data-lucide="alert-circle" class="w-4 h-4"></i> Mandatory</h4>
+          <ul id="mList" class="space-y-2"></ul>
+          <h4 class="mt-5 mb-2 text-xs font-bold uppercase tracking-wide text-slate-500 flex items-center gap-1"><i data-lucide="circle-dashed" class="w-4 h-4"></i> Optional / situational</h4>
+          <ul id="oList" class="space-y-2"></ul>
+
+          <div class="mt-6 flex flex-col sm:flex-row gap-3">
+            <button onclick="startApp()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl py-3.5 flex items-center justify-center gap-2">
+              <i data-lucide="badge-check" class="w-5 h-5"></i> Verify Documents &amp; Start Application
+            </button>
+            <button onclick="openAI()" class="sm:w-auto border border-blue-300 text-blue-700 hover:bg-blue-50 font-semibold rounded-xl px-5 py-3.5 flex items-center justify-center gap-2">
+              <i data-lucide="sparkles" class="w-5 h-5"></i> Ask AI
+            </button>
+          </div>
+          <p id="startMsg" class="text-sm mt-3 hidden" role="status"></p>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-6">
+        <!-- AI -->
+        <div id="aiBox" class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+          <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-3 flex items-center gap-2">
+            <i data-lucide="bot" class="w-5 h-5"></i><div><p class="font-semibold leading-tight">Sync Assistant</p><p class="text-xs text-blue-100">Missing a document? Tell me.</p></div>
+          </div>
+          <div id="chat" class="p-4 h-72 overflow-y-auto space-y-3 text-sm" aria-live="polite"></div>
+          <div class="px-4 pb-2 flex flex-wrap gap-2" id="chips"></div>
+          <form onsubmit="sendChat(event)" class="p-3 border-t border-slate-100 flex gap-2">
+            <input id="chatIn" class="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="e.g. I don't have a birth certificate" aria-label="Message">
+            <button class="bg-blue-600 text-white rounded-lg px-3" aria-label="Send"><i data-lucide="send" class="w-4 h-4"></i></button>
+          </form>
+        </div>
+
+        <!-- Helpline -->
+        <div id="help" class="bg-emerald-50 border border-emerald-200 rounded-2xl p-5">
+          <h3 class="font-bold flex items-center gap-2 text-emerald-800"><i data-lucide="phone-call" class="w-5 h-5"></i> Helpline</h3>
+          <p class="text-sm text-emerald-900 mt-1">Can’t find a substitute? Call and ask the department directly.</p>
+          <a id="dHelp" href="tel:" class="mt-3 block text-center bg-white border border-emerald-300 rounded-xl py-2.5 font-bold text-emerald-700 text-lg"></a>
+          <p class="text-[11px] text-emerald-800/70 mt-2">Placeholder numbers – replace with verified official helplines.</p>
+        </div>
+
+        <!-- Tools -->
+        <div id="tools" class="bg-white rounded-2xl border border-slate-200 p-5">
+          <h3 class="font-bold flex items-center gap-2"><i data-lucide="file-down" class="w-5 h-5 text-blue-600"></i> Built-in Compressor</h3>
+          <p class="text-sm text-slate-500 mt-1">Shrink photos &amp; signatures to fit portal limits. Nothing leaves your device.</p>
+          <label class="mt-3 block border-2 border-dashed border-slate-300 hover:border-blue-400 rounded-xl p-4 text-center text-sm cursor-pointer">
+            <i data-lucide="upload-cloud" class="w-6 h-6 mx-auto text-slate-400"></i>
+            <span class="block mt-1">Choose JPG / PNG image</span>
+            <input id="imgIn" type="file" accept="image/*" class="sr-only" onchange="compress(this.files[0])">
+          </label>
+          <label class="block text-xs mt-3 text-slate-600">Quality: <span id="qVal">60</span>%
+            <input id="q" type="range" min="20" max="90" value="60" class="w-full accent-blue-600" oninput="qVal.textContent=this.value;if(window._f)compress(window._f)">
+          </label>
+          <div id="cOut" class="mt-3 text-sm hidden"></div>
+          <button disabled class="mt-3 w-full text-sm rounded-lg bg-slate-100 text-slate-500 py-2 cursor-not-allowed" title="Server-side in full product">PDF compression – coming soon</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-slate-200 bg-white mt-10 py-6 text-center text-xs text-slate-500 px-4">
+  ScholarSync is an independent aggregator, not a government website. Always verify dates, rules and documents on the official portal.
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
