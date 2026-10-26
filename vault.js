@@ -1,21 +1,21 @@
 // ==============================================================================
 // ScholarSync / Yojna Sathi - Digital Vault Module
-// ==============================================================================
 // Manages student document storage, Supabase storage uploads, secure signed URLs,
-// checklist verification, and scholarship document application packs.
+// checklist verification, and regional scholarship application packs.
 // ==============================================================================
 
 const VAULT_CATEGORIES = [
-  { id: "aadhaar", label: "Aadhaar Card", icon: "credit-card", keywords: ["aadhaar", "aadhar", "adhar"] },
-  { id: "marksheet", label: "Marksheet / Class 10 Admit", icon: "file-text", keywords: ["marksheet", "mark sheet", "admit", "qualifying exam", "previous exam", "class 10"] },
-  { id: "income", label: "Income Certificate / Self-Declaration", icon: "wallet", keywords: ["income", "salary", "self-declaration"] },
-  { id: "residential", label: "Residential Proof / Domicile", icon: "home", keywords: ["residential", "domicile", "address"] },
-  { id: "bank", label: "Bank Passbook (First Page)", icon: "landmark", keywords: ["bank", "passbook", "account"] },
-  { id: "photo", label: "Passport Photo & Signature", icon: "camera", keywords: ["photo", "photograph", "signature", "sign"] },
-  { id: "caste", label: "Caste / Minority Certificate", icon: "award", keywords: ["caste", "minority", "sc/st/obc", "community"] },
+  { id: "aadhaar", label: "Aadhaar / Identity Proof", icon: "credit-card", keywords: ["aadhaar", "aadhar", "adhar", "voter", "pan"] },
+  { id: "marksheet", label: "Marksheet / Academic Transcript", icon: "file-text", keywords: ["marksheet", "mark sheet", "admit", "qualifying exam", "previous exam", "class 10", "class 11", "class 12", "transcript", "transcripts", "academic", "pass certificate", "educational qualification"] },
+  { id: "income", label: "Income Certificate / Self-Declaration", icon: "wallet", keywords: ["income", "salary", "self-declaration", "co-borrower"] },
+  { id: "residential", label: "Residential / Domicile / COI / PRC", icon: "home", keywords: ["residential", "domicile", "address", "coi", "certificate of identification", "sikkim subject", "prc", "permanent resident"] },
+  { id: "bank", label: "Bank Passbook / Cancelled Cheque", icon: "landmark", keywords: ["bank", "passbook", "account", "cheque", "cancelled cheque"] },
+  { id: "photo", label: "Passport Photo & Specimen Signature", icon: "camera", keywords: ["photo", "photograph", "signature", "sign", "passport"] },
+  { id: "caste", label: "Caste / Category / Minority Proof", icon: "award", keywords: ["caste", "minority", "sc/st/obc", "community", "category certificate", "minority community", "self-declaration minority"] },
   { id: "birth", label: "Birth Certificate / Age Proof", icon: "calendar", keywords: ["birth", "age proof"] },
-  { id: "enrolment", label: "Institution Enrolment / Fee Receipt", icon: "graduation-cap", keywords: ["enrolment", "enrollment", "admission", "fee receipt"] },
-  { id: "disability", label: "Disability Certificate", icon: "heart-pulse", keywords: ["disab"] },
+  { id: "enrolment", label: "Course Admission / Fee Receipt", icon: "graduation-cap", keywords: ["enrolment", "enrollment", "admission", "fee receipt", "fee structure", "application form", "admission proof"] },
+  { id: "recommendation", label: "Recommendation / Verification Letter", icon: "file-check", keywords: ["recommendation", "mla", "gazetted", "verification certificate", "school declaration", "school id", "head of institution"] },
+  { id: "disability", label: "Disability Certificate (PwD)", icon: "heart-pulse", keywords: ["disab"] },
   { id: "other", label: "Other Supporting Document", icon: "paperclip", keywords: [] }
 ];
 
@@ -257,7 +257,7 @@ async function downloadVaultDocument(docId) {
     a.click();
     document.body.removeChild(a);
   } else if (typeof Blob !== "undefined" && typeof document !== "undefined") {
-    const blob = new Blob([`ScholarSync Digital Vault\nDocument: ${doc.title}\nOriginal File: ${doc.name}\nUploaded: ${doc.createdAt}\nStatus: Verified Secure Document`], { type: "text/plain" });
+    const blob = new Blob([`Yojna Sathi Digital Vault\nDocument: ${doc.title}\nOriginal File: ${doc.name}\nUploaded: ${doc.createdAt}\nStatus: Verified Secure Document`], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -314,7 +314,7 @@ function loadDemoSampleDocuments() {
       id: "doc_demo_aadhaar",
       userId: user.id,
       category: "aadhaar",
-      title: "Aadhaar Card",
+      title: "Aadhaar Card / Identity Proof",
       name: "Aadhaar_Card_Verified.pdf",
       fileExt: "pdf",
       size: 420 * 1024,
@@ -328,8 +328,8 @@ function loadDemoSampleDocuments() {
       id: "doc_demo_marksheet",
       userId: user.id,
       category: "marksheet",
-      title: "Class 10 Admit Card & Marksheet",
-      name: "Madhyamik_Marksheet_2025.pdf",
+      title: "Qualifying Mark Sheet / Transcripts",
+      name: "Qualifying_Marksheet_2025.pdf",
       fileExt: "pdf",
       size: 780 * 1024,
       sizeFormatted: "780 KB",
@@ -342,7 +342,7 @@ function loadDemoSampleDocuments() {
       id: "doc_demo_income",
       userId: user.id,
       category: "income",
-      title: "Income Certificate (BDO Certified)",
+      title: "Income Certificate (BDO / SDO Certified)",
       name: "Income_Certificate_2026.pdf",
       fileExt: "pdf",
       size: 310 * 1024,
@@ -356,7 +356,7 @@ function loadDemoSampleDocuments() {
       id: "doc_demo_bank",
       userId: user.id,
       category: "bank",
-      title: "Bank Passbook (SBI First Page)",
+      title: "Bank Passbook with IFSC (First Page)",
       name: "Bank_Passbook_SBI.pdf",
       fileExt: "pdf",
       size: 512 * 1024,
@@ -370,8 +370,8 @@ function loadDemoSampleDocuments() {
       id: "doc_demo_residential",
       userId: user.id,
       category: "residential",
-      title: "Residential Certificate / Domicile",
-      name: "Residential_Proof_WB.pdf",
+      title: "Residential / COI / Domicile Certificate",
+      name: "Domicile_COI_Certificate.pdf",
       fileExt: "pdf",
       size: 290 * 1024,
       sizeFormatted: "290 KB",
@@ -381,10 +381,24 @@ function loadDemoSampleDocuments() {
       dataUrl: "",
     },
     {
+      id: "doc_demo_enrolment",
+      userId: user.id,
+      category: "enrolment",
+      title: "Course Admission Receipt / Fee Structure",
+      name: "Admission_Fee_Receipt_2026.pdf",
+      fileExt: "pdf",
+      size: 240 * 1024,
+      sizeFormatted: "240 KB",
+      createdAt: new Date().toISOString(),
+      filePath: `${user.id}/admission_sample.pdf`,
+      inSupabase: false,
+      dataUrl: "",
+    },
+    {
       id: "doc_demo_photo",
       userId: user.id,
       category: "photo",
-      title: "Passport Photo & Signature",
+      title: "Passport Photo & Specimen Signature",
       name: "Passport_Photo_and_Sign.jpg",
       fileExt: "jpg",
       size: 85 * 1024,
@@ -465,14 +479,9 @@ function renderApplicationPack() {
   const pct = Math.round((mandReadyCount / mand.length) * 100);
   const isComplete = pct === 100;
 
-  const schemeButtons = schemes.map(s => {
-    const isSel = s.id === scheme.id;
-    return `
-      <button onclick="setPackScheme('${s.id}')" class="px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5 ${isSel ? "bg-blue-600 text-white shadow-sm" : "bg-slate-100 hover:bg-slate-200 text-slate-700"}">
-        <i data-lucide="${s.icon}" class="w-3.5 h-3.5"></i>
-        <span>${s.short}</span>
-      </button>
-    `;
+  // Options for dropdown selector
+  const schemeSelectOptions = schemes.map(s => {
+    return `<option value="${s.id}" ${s.id === scheme.id ? "selected" : ""}>[${s.stateCode}] ${s.name}</option>`;
   }).join("");
 
   const renderDocRow = ([label, type]) => {
@@ -481,19 +490,19 @@ function renderApplicationPack() {
 
     if (match) {
       return `
-        <div class="flex items-center justify-between p-3 rounded-xl bg-emerald-50/80 border border-emerald-200 text-xs">
+        <div class="flex items-center justify-between p-3 rounded-xl bg-emerald-50/90 border border-emerald-200 text-xs">
           <div class="flex items-center gap-2.5 min-w-0">
-            <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white grid place-items-center shrink-0">
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white grid place-items-center shrink-0">
               <i data-lucide="check" class="w-3.5 h-3.5"></i>
             </span>
             <div class="min-w-0">
-              <p class="font-semibold text-slate-800 truncate">${label}</p>
-              <p class="text-[11px] text-emerald-800 truncate">Stored: ${match.name} (${match.sizeFormatted})</p>
+              <p class="font-semibold text-stone-900 truncate">${label}</p>
+              <p class="text-[11px] text-emerald-800 truncate">Ready: ${match.name} (${match.sizeFormatted})</p>
             </div>
           </div>
           <div class="flex items-center gap-2 shrink-0">
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${isMand ? "bg-rose-100 text-rose-700" : "bg-slate-100 text-slate-600"}">${isMand ? "Mandatory" : "Optional"}</span>
-            <button onclick="downloadVaultDocument('${match.id}')" title="Download signed copy" class="p-1.5 rounded-lg bg-white border border-emerald-300 hover:bg-emerald-100 text-emerald-700 transition">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${isMand ? "bg-rose-100 text-rose-800" : "bg-stone-200 text-stone-700"}">${isMand ? "Mandatory" : "Optional"}</span>
+            <button onclick="downloadVaultDocument('${match.id}')" title="Download signed copy" class="p-1.5 rounded-lg bg-white border border-emerald-300 hover:bg-emerald-100 text-emerald-800 transition">
               <i data-lucide="download" class="w-3.5 h-3.5"></i>
             </button>
           </div>
@@ -501,19 +510,19 @@ function renderApplicationPack() {
       `;
     } else {
       return `
-        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+        <div class="flex items-center justify-between p-3 rounded-xl bg-stone-50 border border-stone-200 text-xs">
           <div class="flex items-center gap-2.5 min-w-0">
-            <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-700 grid place-items-center shrink-0">
+            <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-800 grid place-items-center shrink-0">
               <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i>
             </span>
             <div class="min-w-0">
-              <p class="font-medium text-slate-700 truncate">${label}</p>
-              <p class="text-[11px] text-amber-700">Not in vault</p>
+              <p class="font-medium text-stone-700 truncate">${label}</p>
+              <p class="text-[11px] text-amber-800">Not in vault</p>
             </div>
           </div>
           <div class="flex items-center gap-2 shrink-0">
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${isMand ? "bg-rose-100 text-rose-700" : "bg-slate-100 text-slate-600"}">${isMand ? "Mandatory" : "Optional"}</span>
-            <button onclick="quickSelectCategoryForUpload('${label}')" class="text-[11px] font-semibold text-blue-600 hover:underline">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${isMand ? "bg-rose-100 text-rose-800" : "bg-stone-200 text-stone-700"}">${isMand ? "Mandatory" : "Optional"}</span>
+            <button onclick="quickSelectCategoryForUpload('${label}')" class="text-[11px] font-semibold text-emerald-800 hover:underline">
               Upload
             </button>
           </div>
@@ -523,37 +532,43 @@ function renderApplicationPack() {
   };
 
   container.innerHTML = `
-    <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
-      <div>
-        <h4 class="font-bold text-slate-800 flex items-center gap-1.5">
-          <i data-lucide="package-check" class="w-4 h-4 text-blue-600"></i>
+    <div class="mb-4">
+      <div class="flex items-center justify-between mb-2">
+        <h4 class="font-bold text-stone-900 flex items-center gap-1.5 text-sm sm:text-base">
+          <i data-lucide="package-check" class="w-4 h-4 text-emerald-700"></i>
           <span>Scheme Application Pack</span>
         </h4>
-        <p class="text-xs text-slate-500">Auto-bundle documents for official submission</p>
+        <span class="text-[11px] bg-stone-100 text-stone-600 px-2 py-0.5 rounded-full font-medium">${scheme.state}</span>
       </div>
-      <div class="flex gap-1.5 overflow-x-auto pb-1 max-w-full">
-        ${schemeButtons}
+      <p class="text-xs text-stone-500 mb-3">Select any scholarship to review prerequisite document readiness or download a complete submission pack.</p>
+
+      <!-- Scheme Selector Dropdown -->
+      <div>
+        <label for="packSchemeSelect" class="block text-xs font-semibold text-stone-700 mb-1">Target Scheme</label>
+        <select id="packSchemeSelect" onchange="setPackScheme(this.value)" class="w-full rounded-xl border border-stone-300 bg-white px-3 py-2 text-xs font-medium text-stone-800 focus:border-emerald-700 focus:outline-none shadow-2xs">
+          ${schemeSelectOptions}
+        </select>
       </div>
     </div>
 
     <!-- Readiness Bar -->
-    <div class="bg-white rounded-2xl border border-slate-200 p-4 mb-4">
+    <div class="bg-stone-50 rounded-2xl border border-stone-200 p-4 mb-4">
       <div class="flex items-center justify-between text-xs font-semibold mb-1.5">
-        <span class="text-slate-700">${scheme.name}</span>
-        <span class="${isComplete ? "text-emerald-600 font-bold" : "text-blue-600"}">${mandReadyCount} / ${mand.length} Mandatory Ready (${pct}%)</span>
+        <span class="text-stone-800 font-bold truncate max-w-[200px]">${scheme.short} Readiness</span>
+        <span class="${isComplete ? "text-emerald-800 font-bold" : "text-stone-700"}">${mandReadyCount} / ${mand.length} Mandatory Ready (${pct}%)</span>
       </div>
-      <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
-        <div class="h-full transition-all duration-500 ${isComplete ? "bg-emerald-500" : pct >= 50 ? "bg-blue-600" : "bg-amber-400"}" style="width: ${pct}%"></div>
+      <div class="h-2.5 bg-stone-200 rounded-full overflow-hidden">
+        <div class="h-full transition-all duration-500 ${isComplete ? "bg-emerald-600" : pct >= 50 ? "bg-emerald-700" : "bg-amber-500"}" style="width: ${pct}%"></div>
       </div>
-      <p class="text-[11px] text-slate-500 mt-2">
+      <p class="text-[11px] text-stone-600 mt-2">
         ${isComplete ? "🎉 Application pack is 100% complete! All mandatory files are ready in your vault." : `Need ${mand.length - mandReadyCount} more mandatory document(s) before applying.`}
       </p>
 
-      <div class="mt-4 flex flex-wrap gap-2">
-        <button onclick="downloadApplicationPack('${scheme.id}')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl py-2.5 px-4 flex items-center justify-center gap-1.5 shadow-sm transition">
+      <div class="mt-4 flex flex-col sm:flex-row gap-2">
+        <button onclick="downloadApplicationPack('${scheme.id}')" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-xl py-2.5 px-4 flex items-center justify-center gap-1.5 shadow-sm transition">
           <i data-lucide="download" class="w-4 h-4"></i> Download Application Pack
         </button>
-        <button onclick="openScheme('${scheme.id}')" class="border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded-xl py-2.5 px-4 flex items-center justify-center gap-1.5 transition">
+        <button onclick="openScheme('${scheme.id}')" class="border border-stone-300 hover:bg-stone-100 text-stone-700 text-xs font-semibold rounded-xl py-2.5 px-4 flex items-center justify-center gap-1.5 transition">
           <i data-lucide="external-link" class="w-4 h-4"></i> Review in Checklist
         </button>
       </div>
@@ -561,7 +576,7 @@ function renderApplicationPack() {
 
     <!-- Required Docs Checklist Breakdown -->
     <div class="space-y-2">
-      <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Required Documents (${scheme.docs.length})</p>
+      <p class="text-xs font-bold uppercase tracking-wider text-stone-400">Required Documents (${scheme.docs.length})</p>
       ${scheme.docs.map(renderDocRow).join("")}
     </div>
   `;
@@ -602,26 +617,26 @@ function renderVault() {
   if (!user) {
     vaultView.innerHTML = `
       <div class="max-w-2xl mx-auto py-12 text-center">
-        <div class="w-16 h-16 rounded-2xl bg-blue-100 text-blue-700 grid place-items-center mx-auto mb-4">
+        <div class="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-800 grid place-items-center mx-auto mb-4 border border-emerald-200">
           <i data-lucide="lock" class="w-8 h-8"></i>
         </div>
-        <h2 class="text-3xl font-bold text-slate-800">Student Digital Vault</h2>
-        <p class="text-slate-600 mt-2 max-w-md mx-auto text-sm leading-relaxed">
-          Store your Aadhaar, marksheets, income certificates, and bank passbooks in your encrypted personal vault.
+        <h2 class="text-3xl font-bold text-stone-900">Student Digital Vault</h2>
+        <p class="text-stone-600 mt-2 max-w-md mx-auto text-sm leading-relaxed">
+          Store your Aadhaar, marksheets, income certificates, COI, and bank passbooks in your encrypted personal vault.
           Upload once, pre-tick checklist requirements automatically, and export scholarship application packs.
         </p>
         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <button onclick="openAuthModal('login')" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3 flex items-center justify-center gap-2 shadow-sm transition">
+          <button onclick="openAuthModal('login')" class="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-800 text-white font-semibold rounded-xl px-6 py-3 flex items-center justify-center gap-2 shadow-sm transition">
             <i data-lucide="user" class="w-4 h-4"></i> Sign In to Vault
           </button>
-          <button onclick="openAuthModal('signup')" class="w-full sm:w-auto border border-slate-300 hover:bg-white text-slate-700 font-semibold rounded-xl px-6 py-3 flex items-center justify-center gap-2 transition">
+          <button onclick="openAuthModal('signup')" class="w-full sm:w-auto border border-stone-300 hover:bg-white text-stone-700 font-semibold rounded-xl px-6 py-3 flex items-center justify-center gap-2 transition">
             <i data-lucide="user-plus" class="w-4 h-4"></i> Create Free Account
           </button>
         </div>
-        <div class="mt-8 pt-6 border-t border-slate-200 flex flex-wrap justify-center gap-6 text-xs text-slate-500">
-          <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i> Supabase Storage</span>
-          <span class="flex items-center gap-1.5"><i data-lucide="key" class="w-4 h-4 text-blue-600"></i> Signed Download URLs</span>
-          <span class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600"></i> Auto Pre-flight Checklists</span>
+        <div class="mt-8 pt-6 border-t border-stone-200 flex flex-wrap justify-center gap-6 text-xs text-stone-500">
+          <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-700"></i> Supabase Storage</span>
+          <span class="flex items-center gap-1.5"><i data-lucide="key" class="w-4 h-4 text-emerald-800"></i> Signed Download URLs</span>
+          <span class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-4 h-4 text-lime-900"></i> Auto Pre-flight Checklists</span>
         </div>
       </div>
     `;
@@ -645,39 +660,39 @@ function renderVault() {
   vaultView.innerHTML = `
     <!-- Top Bar -->
     <div class="flex items-center justify-between flex-wrap gap-4 mb-6">
-      <button onclick="showHome()" class="flex items-center gap-1.5 text-sm text-blue-700 font-semibold hover:underline">
+      <button onclick="showHome()" class="flex items-center gap-1.5 text-sm text-emerald-800 font-semibold hover:underline">
         <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Scholarships
       </button>
       <div class="flex items-center gap-2">
         <span class="inline-flex items-center gap-1.5 text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full font-medium">
           <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> ${storageStatus}
         </span>
-        <button onclick="loadDemoSampleDocuments()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1 rounded-full font-medium transition" title="Add pre-filled sample documents for testing">
+        <button onclick="loadDemoSampleDocuments()" class="text-xs bg-stone-100 hover:bg-stone-200 text-stone-700 px-3 py-1 rounded-full font-medium transition" title="Add pre-filled sample documents for testing">
           + Load Sample Docs
         </button>
       </div>
     </div>
 
     <!-- Vault Banner -->
-    <div class="rounded-3xl bg-gradient-to-br from-indigo-700 via-blue-700 to-blue-800 text-white p-6 sm:p-8 mb-8 shadow-sm">
+    <div class="rounded-3xl bg-gradient-to-br from-lime-950 via-emerald-950 to-zinc-900 text-stone-100 p-6 sm:p-8 mb-8 border border-emerald-900/30 shadow-sm">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span class="inline-flex items-center gap-1.5 text-xs bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 font-medium mb-3">
+          <span class="inline-flex items-center gap-1.5 text-xs bg-white/15 text-emerald-300 backdrop-blur-xs rounded-full px-3 py-1 font-medium mb-3 border border-emerald-500/20">
             <i data-lucide="folder-lock" class="w-3.5 h-3.5 text-emerald-300"></i> Personal Digital Vault
           </span>
-          <h2 class="text-2xl sm:text-3xl font-bold">Welcome, ${userName}</h2>
-          <p class="text-blue-100 text-sm mt-1 max-w-xl">
-            Your stored documents are ready for instant scholarship verification. Whenever you view a scheme, matching documents are automatically checked off.
+          <h2 class="text-2xl sm:text-3xl font-bold text-stone-50">Welcome, ${userName}</h2>
+          <p class="text-stone-300 text-xs sm:text-sm mt-1 max-w-xl leading-relaxed">
+            Your stored documents are ready for instant scholarship verification across West Bengal, Assam, and Sikkim. Whenever you view a scheme, matching certificates are automatically checked off.
           </p>
         </div>
-        <div class="flex sm:flex-col gap-4 text-right bg-white/10 rounded-2xl p-4 shrink-0">
+        <div class="flex sm:flex-col gap-4 text-right bg-white/10 rounded-2xl p-4 shrink-0 border border-white/10">
           <div>
-            <p class="text-2xl font-bold">${docs.length}</p>
-            <p class="text-xs text-blue-200">Documents Stored</p>
+            <p class="text-2xl font-bold text-stone-50">${docs.length}</p>
+            <p class="text-xs text-stone-300">Documents Stored</p>
           </div>
           <div>
             <p class="text-sm font-semibold text-emerald-300">${formatFileSize(totalBytes)}</p>
-            <p class="text-xs text-blue-200">Vault Size</p>
+            <p class="text-xs text-stone-300">Vault Size</p>
           </div>
         </div>
       </div>
@@ -690,66 +705,66 @@ function renderVault() {
       <div class="lg:col-span-7 space-y-6">
         
         <!-- Upload Card -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <div class="bg-white rounded-2xl border border-stone-200 p-6 shadow-xs">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="font-bold text-base flex items-center gap-2">
-              <i data-lucide="cloud-upload" class="w-5 h-5 text-blue-600"></i>
+            <h3 class="font-bold text-stone-900 text-base flex items-center gap-2">
+              <i data-lucide="cloud-upload" class="w-5 h-5 text-emerald-700"></i>
               <span>Upload Document to Vault</span>
             </h3>
-            <span class="text-xs text-slate-400">PDF, JPG, PNG up to 10MB</span>
+            <span class="text-xs text-stone-400">PDF, JPG, PNG up to 10MB</span>
           </div>
 
           <form id="vaultUploadForm" onsubmit="handleVaultUpload(event)" class="space-y-4">
             <div class="grid sm:grid-cols-2 gap-3">
               <div>
-                <label for="vaultDocCategory" class="block text-xs font-semibold text-slate-700 mb-1">Document Type</label>
-                <select id="vaultDocCategory" class="w-full rounded-xl border border-slate-300 px-3 py-2 text-xs focus:border-blue-600 focus:outline-none bg-white">
+                <label for="vaultDocCategory" class="block text-xs font-semibold text-stone-700 mb-1">Document Category</label>
+                <select id="vaultDocCategory" class="w-full rounded-xl border border-stone-300 px-3 py-2 text-xs focus:border-emerald-700 focus:outline-none bg-white text-stone-800">
                   ${categoryOptions}
                 </select>
               </div>
               <div>
-                <label for="vaultDocTitle" class="block text-xs font-semibold text-slate-700 mb-1">Document Label (Optional)</label>
-                <input type="text" id="vaultDocTitle" placeholder="e.g. My Aadhaar 2026" class="w-full rounded-xl border border-slate-300 px-3 py-2 text-xs focus:border-blue-600 focus:outline-none">
+                <label for="vaultDocTitle" class="block text-xs font-semibold text-stone-700 mb-1">Custom Label (Optional)</label>
+                <input type="text" id="vaultDocTitle" placeholder="e.g. My COI Certificate 2026" class="w-full rounded-xl border border-stone-300 px-3 py-2 text-xs focus:border-emerald-700 focus:outline-none text-stone-800">
               </div>
             </div>
 
             <!-- Drag & Drop File Selector -->
             <div>
-              <label for="vaultFileInput" class="block border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-xl p-4 text-center cursor-pointer transition bg-slate-50/50 hover:bg-blue-50/30">
-                <i data-lucide="file-up" class="w-6 h-6 mx-auto text-blue-600 mb-1"></i>
-                <p id="vaultFileLabel" class="text-xs font-medium text-slate-700">Click to choose document or drag here</p>
-                <p class="text-[11px] text-slate-400 mt-0.5">Scanned certificates or original portal files</p>
+              <label for="vaultFileInput" class="block border-2 border-dashed border-stone-300 hover:border-emerald-700 rounded-xl p-4 text-center cursor-pointer transition bg-stone-50/50 hover:bg-emerald-50/20">
+                <i data-lucide="file-up" class="w-6 h-6 mx-auto text-emerald-700 mb-1"></i>
+                <p id="vaultFileLabel" class="text-xs font-medium text-stone-700">Click to choose certificate file or drag here</p>
+                <p class="text-[11px] text-stone-400 mt-0.5">Scanned certificates or original portal files</p>
                 <input id="vaultFileInput" type="file" accept=".pdf,image/jpeg,image/png" class="sr-only" onchange="handleFileSelect(this)">
               </label>
             </div>
 
             <div id="vaultUploadMsg" class="hidden text-xs p-3 rounded-xl"></div>
 
-            <button type="submit" id="vaultUploadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition shadow-sm">
+            <button type="submit" id="vaultUploadBtn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-semibold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition shadow-sm">
               <i data-lucide="shield-check" class="w-4 h-4"></i> Securely Save to Digital Vault
             </button>
           </form>
         </div>
 
         <!-- Stored Documents List -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <div class="bg-white rounded-2xl border border-stone-200 p-6 shadow-xs">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="font-bold text-base flex items-center gap-2">
-              <i data-lucide="files" class="w-5 h-5 text-indigo-600"></i>
+            <h3 class="font-bold text-stone-900 text-base flex items-center gap-2">
+              <i data-lucide="files" class="w-5 h-5 text-emerald-800"></i>
               <span>Stored Vault Documents (${docs.length})</span>
             </h3>
-            ${docs.length > 0 ? `<button onclick="loadDemoSampleDocuments()" class="text-xs text-blue-600 hover:underline">Reset Demo Samples</button>` : ""}
+            ${docs.length > 0 ? `<button onclick="loadDemoSampleDocuments()" class="text-xs text-emerald-800 hover:underline">Reset Demo Samples</button>` : ""}
           </div>
 
           ${docs.length === 0 ? `
-            <div class="text-center py-10 px-4 border border-dashed border-slate-200 rounded-xl">
-              <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-400 grid place-items-center mx-auto mb-2">
+            <div class="text-center py-10 px-4 border border-dashed border-stone-200 rounded-xl">
+              <div class="w-12 h-12 rounded-xl bg-stone-100 text-stone-400 grid place-items-center mx-auto mb-2">
                 <i data-lucide="folder-open" class="w-6 h-6"></i>
               </div>
-              <p class="text-sm font-semibold text-slate-700">No documents in your vault yet</p>
-              <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">Upload your certificates above or load pre-filled sample documents to test the pre-flight checklist.</p>
-              <button onclick="loadDemoSampleDocuments()" class="mt-4 bg-blue-50 text-blue-700 hover:bg-blue-100 font-semibold px-4 py-2 rounded-xl text-xs transition inline-flex items-center gap-1.5">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Load Pre-verified Demo Docs
+              <p class="text-sm font-semibold text-stone-700">No documents in your vault yet</p>
+              <p class="text-xs text-stone-500 mt-1 max-w-sm mx-auto">Upload your certificates above or load pre-filled sample documents to test the pre-flight checklist.</p>
+              <button onclick="loadDemoSampleDocuments()" class="mt-4 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-semibold px-4 py-2 rounded-xl text-xs transition inline-flex items-center gap-1.5 border border-emerald-200">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-700"></i> Load Pre-verified Demo Docs
               </button>
             </div>
           ` : `
@@ -757,25 +772,25 @@ function renderVault() {
               ${docs.map(doc => {
                 const cat = VAULT_CATEGORIES.find(c => c.id === doc.category) || VAULT_CATEGORIES[0];
                 return `
-                  <div class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 hover:border-blue-300 transition bg-white">
+                  <div class="flex items-center justify-between p-3.5 rounded-xl border border-stone-200 hover:border-emerald-300 transition bg-white">
                     <div class="flex items-center gap-3 min-w-0">
-                      <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 grid place-items-center shrink-0">
+                      <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-800 grid place-items-center shrink-0 border border-emerald-100">
                         <i data-lucide="${cat.icon}" class="w-5 h-5"></i>
                       </div>
                       <div class="min-w-0">
                         <div class="flex items-center gap-2">
-                          <p class="font-semibold text-sm text-slate-800 truncate">${doc.title || cat.label}</p>
-                          <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-medium shrink-0">${cat.label}</span>
+                          <p class="font-semibold text-xs sm:text-sm text-stone-900 truncate">${doc.title || cat.label}</p>
+                          <span class="text-[10px] bg-stone-100 text-stone-600 px-2 py-0.5 rounded-full font-medium shrink-0">${cat.label}</span>
                         </div>
-                        <p class="text-xs text-slate-400 truncate mt-0.5">${doc.name} • ${doc.sizeFormatted || "Ready"}</p>
+                        <p class="text-xs text-stone-400 truncate mt-0.5">${doc.name} • ${doc.sizeFormatted || "Ready"}</p>
                       </div>
                     </div>
                     <div class="flex items-center gap-1.5 shrink-0 ml-2">
-                      <button onclick="downloadVaultDocument('${doc.id}')" title="Secure Download / Signed URL" class="p-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold flex items-center gap-1 transition">
+                      <button onclick="downloadVaultDocument('${doc.id}')" title="Secure Download / Signed URL" class="p-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-semibold flex items-center gap-1 transition">
                         <i data-lucide="download" class="w-4 h-4"></i>
                         <span class="hidden sm:inline">Download</span>
                       </button>
-                      <button onclick="deleteVaultDocument('${doc.id}')" title="Remove document" class="p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition" aria-label="Delete">
+                      <button onclick="deleteVaultDocument('${doc.id}')" title="Remove document" class="p-2 rounded-lg text-stone-400 hover:text-rose-600 hover:bg-rose-50 transition" aria-label="Delete">
                         <i data-lucide="trash-2" class="w-4 h-4"></i>
                       </button>
                     </div>
@@ -789,7 +804,7 @@ function renderVault() {
 
       <!-- Right Column: Scholarship Application Pack Manager -->
       <div class="lg:col-span-5 space-y-6">
-        <div id="vaultPackContainer" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm"></div>
+        <div id="vaultPackContainer" class="bg-white rounded-2xl border border-stone-200 p-6 shadow-xs"></div>
       </div>
 
     </div>
@@ -809,7 +824,7 @@ function handleFileSelect(input) {
   if (!label) return;
 
   if (file) {
-    label.innerHTML = `Selected: <b class="text-blue-700">${file.name}</b> (${formatFileSize(file.size)})`;
+    label.innerHTML = `Selected: <b class="text-emerald-800">${file.name}</b> (${formatFileSize(file.size)})`;
   } else {
     label.textContent = "Click to choose document or drag here";
   }
@@ -888,4 +903,3 @@ function onAuthChangeVault() {
     renderVault();
   }
 }
-

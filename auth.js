@@ -213,17 +213,17 @@ function switchAuthTab(tab) {
   clearAuthAlert();
 
   if (tab === "signup") {
-    if (tabSignup) tabSignup.className = "flex-1 py-3 border-b-2 border-blue-600 text-blue-600 font-bold transition";
-    if (tabLogin) tabLogin.className = "flex-1 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition";
+    if (tabSignup) tabSignup.className = "flex-1 py-3 border-b-2 border-emerald-700 text-emerald-800 font-bold transition";
+    if (tabLogin) tabLogin.className = "flex-1 py-3 border-b-2 border-transparent text-stone-500 hover:text-stone-800 transition";
     if (signupForm) signupForm.classList.remove("hidden");
     if (loginForm) loginForm.classList.add("hidden");
     if (authTitle) authTitle.textContent = "Create Student Account";
   } else {
-    if (tabLogin) tabLogin.className = "flex-1 py-3 border-b-2 border-blue-600 text-blue-600 font-bold transition";
-    if (tabSignup) tabSignup.className = "flex-1 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition";
+    if (tabLogin) tabLogin.className = "flex-1 py-3 border-b-2 border-emerald-700 text-emerald-800 font-bold transition";
+    if (tabSignup) tabSignup.className = "flex-1 py-3 border-b-2 border-transparent text-stone-500 hover:text-stone-800 transition";
     if (loginForm) loginForm.classList.remove("hidden");
     if (signupForm) signupForm.classList.add("hidden");
-    if (authTitle) authTitle.textContent = "Sign in to ScholarSync";
+    if (authTitle) authTitle.textContent = "Sign in to Yojna Sathi";
   }
 
   if (typeof window !== "undefined" && window.lucide) lucide.createIcons();
@@ -371,18 +371,18 @@ function updateAuthUI() {
 
     authContainer.innerHTML = `
       <div class="flex items-center gap-2">
-        <button onclick="showVault()" class="flex items-center gap-2 bg-blue-50 text-blue-800 text-xs font-semibold rounded-lg px-3 py-1.5 border border-blue-200 hover:bg-blue-100 transition" title="Go to My Digital Vault">
-          <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0">${initial}</span>
+        <button onclick="showVault()" class="flex items-center gap-2 bg-emerald-50 text-emerald-900 text-xs font-semibold rounded-xl px-3 py-1.5 border border-emerald-200 hover:bg-emerald-100 transition shadow-2xs" title="Go to My Digital Vault">
+          <span class="w-6 h-6 rounded-full bg-emerald-800 text-white flex items-center justify-center text-xs font-bold shrink-0">${initial}</span>
           <span class="hidden sm:inline max-w-[110px] truncate">${name}</span>
         </button>
-        <button onclick="signOutStudent()" class="text-slate-500 hover:text-rose-600 p-2 rounded-lg hover:bg-slate-100 text-xs font-medium transition" title="Sign out" aria-label="Sign out">
+        <button onclick="signOutStudent()" class="text-stone-500 hover:text-rose-700 p-2 rounded-xl hover:bg-stone-100 text-xs font-medium transition" title="Sign out" aria-label="Sign out">
           <i data-lucide="log-out" class="w-4 h-4"></i>
         </button>
       </div>
     `;
   } else {
     authContainer.innerHTML = `
-      <button id="authBtn" onclick="openAuthModal('login')" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg px-4 py-2 flex items-center gap-1.5 transition">
+      <button id="authBtn" onclick="openAuthModal('login')" class="bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold rounded-xl px-4 py-2 flex items-center gap-1.5 transition shadow-sm">
         <i data-lucide="user" class="w-4 h-4"></i>
         <span>Sign in</span>
       </button>

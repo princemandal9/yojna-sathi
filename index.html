@@ -3,37 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ScholarSync – West Bengal Scholarships, Ready Before You Apply</title>
+<title>Yojna Sathi – Regional Scholarships & Digital Vault (WB, Assam, Sikkim)</title>
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js"></script>
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="bg-stone-50 text-stone-800 min-h-screen flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900">
 
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:p-3 focus:bg-white z-50">Skip to content</a>
 
 <!-- HEADER -->
-<header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+<header class="bg-stone-50/95 backdrop-blur-md border-b border-stone-200 sticky top-0 z-30">
   <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-    <button onclick="showHome()" class="flex items-center gap-2 font-bold text-lg text-blue-700">
-      <span class="w-9 h-9 rounded-xl bg-blue-600 text-white grid place-items-center"><i data-lucide="graduation-cap" class="w-5 h-5"></i></span>
-      ScholarSync
+    <button onclick="showHome()" class="flex items-center gap-2.5 font-bold text-lg text-stone-900">
+      <span class="w-9 h-9 rounded-xl bg-emerald-800 text-stone-50 grid place-items-center shadow-sm">
+        <i data-lucide="graduation-cap" class="w-5 h-5 text-emerald-100"></i>
+      </span>
+      <span class="tracking-tight">Yojna Sathi</span>
     </button>
-    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-      <button onclick="showHome()" class="hover:text-blue-700 transition">Schemes</button>
-      <button onclick="showVault()" class="hover:text-blue-700 flex items-center gap-1.5 transition">
-        <i data-lucide="folder-lock" class="w-4 h-4 text-blue-600"></i> My Vault
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-stone-600">
+      <button onclick="showHome()" class="hover:text-emerald-800 transition">Schemes</button>
+      <button onclick="showVault()" class="hover:text-emerald-800 flex items-center gap-1.5 transition">
+        <i data-lucide="folder-lock" class="w-4 h-4 text-emerald-700"></i> My Vault
       </button>
-      <a href="#tools" class="hover:text-blue-700 transition">Tools</a>
-      <a href="#help" class="hover:text-blue-700 transition">Helpline</a>
+      <a href="#tools" class="hover:text-emerald-800 transition">Tools</a>
+      <a href="#help" class="hover:text-emerald-800 transition">Helplines</a>
     </nav>
     <div class="flex items-center gap-2">
-      <button onclick="showVault()" class="md:hidden flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-blue-700 px-2.5 py-1.5 rounded-lg border border-slate-200 bg-slate-50 transition">
-        <i data-lucide="folder-lock" class="w-3.5 h-3.5 text-blue-600"></i> Vault
+      <button onclick="showVault()" class="md:hidden flex items-center gap-1 text-xs font-semibold text-stone-700 hover:text-emerald-800 px-2.5 py-1.5 rounded-lg border border-stone-200 bg-white transition">
+        <i data-lucide="folder-lock" class="w-3.5 h-3.5 text-emerald-700"></i> Vault
       </button>
-      <span class="hidden sm:inline text-xs bg-slate-100 rounded-full px-3 py-1 text-slate-600 font-medium">EN | বাং</span>
+      <span class="hidden sm:inline text-xs bg-stone-200/70 rounded-full px-3 py-1 text-stone-600 font-medium">WB • AS • SK</span>
       <div id="authContainer">
-        <button id="authBtn" onclick="handleAuthBtnClick()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg px-4 py-2 flex items-center gap-1.5 transition">
+        <button id="authBtn" onclick="handleAuthBtnClick()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold rounded-xl px-4 py-2 flex items-center gap-1.5 transition shadow-sm">
           <i data-lucide="user" class="w-4 h-4"></i>
           <span>Sign in</span>
         </button>
@@ -46,121 +48,170 @@
 
   <!-- HOME VIEW -->
   <section id="home" class="fade">
-    <div class="rounded-3xl bg-gradient-to-br from-blue-600 to-blue-800 text-white p-6 sm:p-10 mb-8 shadow-sm">
-      <p class="inline-flex items-center gap-2 text-xs bg-white/15 rounded-full px-3 py-1 mb-4"><i data-lucide="shield-check" class="w-4 h-4"></i> No more mid-form surprises</p>
-      <h1 class="text-3xl sm:text-4xl font-bold leading-tight max-w-2xl">Know every document you need <span class="text-emerald-300">before</span> you start applying.</h1>
-      <p class="mt-3 text-blue-100 max-w-xl">Browse government schemes, check eligibility, run a readiness audit, and get AI help if a document is missing.</p>
+    <div class="rounded-3xl bg-gradient-to-br from-lime-950 via-emerald-950 to-zinc-900 text-stone-100 p-6 sm:p-10 mb-8 border border-emerald-900/30 shadow-sm">
+      <p class="inline-flex items-center gap-2 text-xs bg-white/10 text-emerald-300 rounded-full px-3 py-1 mb-4 border border-emerald-500/20">
+        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> Pre-flight checklist &amp; Digital Vault
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-bold leading-tight max-w-2xl text-stone-50">Know every document you need <span class="text-emerald-300">before</span> you start applying.</h1>
+      <p class="mt-3 text-stone-300 max-w-xl text-sm leading-relaxed">Centralized, verified scholarship database for West Bengal, Assam, and Sikkim. Audit your document readiness and download full application packs in one click.</p>
     </div>
 
-    <div class="flex items-end justify-between mb-4">
-      <h2 class="text-xl font-bold">Government Schemes</h2>
-      <p class="text-xs text-slate-500">Dates are typical windows – always confirm on the official portal.</p>
+    <!-- Filter Header & Search Bar -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 class="text-xl sm:text-2xl font-bold text-stone-900">Regional Scholarships</h2>
+          <span id="schemeCountBadge" class="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-0.5 rounded-full border border-emerald-200">13 Schemes</span>
+        </div>
+        <p class="text-xs text-stone-500 mt-1">Select a state or search by eligibility criteria. All timelines are verified typical windows.</p>
+      </div>
+      <!-- Search input -->
+      <div class="relative w-full md:w-72 shrink-0">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </span>
+        <input type="text" id="schemeSearchInput" oninput="handleSchemeSearch(this.value)" placeholder="Search by name, eligibility, state..." class="w-full pl-9 pr-3 py-2 rounded-xl border border-stone-300 bg-white text-xs focus:border-emerald-700 focus:outline-none transition text-stone-800 placeholder-stone-400 shadow-xs">
+      </div>
     </div>
+
+    <!-- State Filter Tabs Bar -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-2 mb-6" id="stateFilterBar"></div>
+
+    <!-- Scheme Cards Grid -->
     <div id="schemeGrid" class="grid sm:grid-cols-2 gap-5"></div>
   </section>
 
   <!-- DETAIL VIEW -->
   <section id="detail" class="hidden fade">
-    <button onclick="showHome()" class="flex items-center gap-1 text-sm text-blue-700 font-medium mb-4"><i data-lucide="arrow-left" class="w-4 h-4"></i> All schemes</button>
+    <button onclick="showHome()" class="flex items-center gap-1 text-sm text-emerald-800 font-semibold mb-4 hover:text-emerald-950 transition">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i> All schemes
+    </button>
 
     <div class="grid lg:grid-cols-3 gap-6">
       <div class="lg:col-span-2 space-y-6">
 
         <!-- Overview -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+        <div class="bg-white rounded-2xl border border-stone-200 p-6 shadow-xs">
           <div class="flex items-start gap-4">
-            <div id="dLogo" class="w-14 h-14 rounded-2xl grid place-items-center text-white shrink-0"></div>
+            <div id="dLogo" class="w-14 h-14 rounded-2xl grid place-items-center text-white shrink-0 shadow-sm"></div>
             <div class="flex-1">
               <div class="flex flex-wrap items-center gap-2">
-                <h2 id="dName" class="text-2xl font-bold"></h2>
+                <h2 id="dName" class="text-xl sm:text-2xl font-bold text-stone-900 leading-tight"></h2>
                 <span id="dStatus" class="text-xs font-semibold rounded-full px-3 py-1"></span>
               </div>
-              <p id="dDept" class="text-sm text-slate-500 mt-1"></p>
+              <p id="dDept" class="text-xs sm:text-sm text-stone-500 mt-1"></p>
             </div>
           </div>
           <dl class="grid sm:grid-cols-2 gap-3 mt-5 text-sm">
-            <div class="bg-slate-50 rounded-xl p-4"><dt class="text-slate-500 flex items-center gap-2"><i data-lucide="calendar" class="w-4 h-4"></i>Typical application window</dt><dd id="dWindow" class="font-semibold mt-1"></dd></div>
-            <div class="bg-slate-50 rounded-xl p-4"><dt class="text-slate-500 flex items-center gap-2"><i data-lucide="alarm-clock" class="w-4 h-4"></i>Deadline</dt><dd id="dDeadline" class="font-semibold mt-1"></dd></div>
-            <div class="bg-slate-50 rounded-xl p-4"><dt class="text-slate-500 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4"></i>Eligibility</dt><dd id="dElig" class="font-semibold mt-1"></dd></div>
-            <div class="bg-slate-50 rounded-xl p-4"><dt class="text-slate-500 flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4"></i>Mode of application</dt><dd id="dMode" class="font-semibold mt-1"></dd></div>
+            <div class="bg-stone-50 rounded-xl p-4 border border-stone-100">
+              <dt class="text-stone-500 text-xs flex items-center gap-2 font-medium"><i data-lucide="calendar" class="w-4 h-4 text-emerald-700"></i>Typical application window</dt>
+              <dd id="dWindow" class="font-semibold text-stone-800 mt-1 text-xs sm:text-sm"></dd>
+            </div>
+            <div class="bg-stone-50 rounded-xl p-4 border border-stone-100">
+              <dt class="text-stone-500 text-xs flex items-center gap-2 font-medium"><i data-lucide="alarm-clock" class="w-4 h-4 text-emerald-700"></i>Deadline</dt>
+              <dd id="dDeadline" class="font-semibold text-stone-800 mt-1 text-xs sm:text-sm"></dd>
+            </div>
+            <div class="bg-stone-50 rounded-xl p-4 border border-stone-100">
+              <dt class="text-stone-500 text-xs flex items-center gap-2 font-medium"><i data-lucide="user-check" class="w-4 h-4 text-emerald-700"></i>Eligibility criteria</dt>
+              <dd id="dElig" class="font-semibold text-stone-800 mt-1 text-xs sm:text-sm leading-snug"></dd>
+            </div>
+            <div class="bg-stone-50 rounded-xl p-4 border border-stone-100">
+              <dt class="text-stone-500 text-xs flex items-center gap-2 font-medium"><i data-lucide="globe" class="w-4 h-4 text-emerald-700"></i>Mode of application</dt>
+              <dd id="dMode" class="font-semibold text-stone-800 mt-1 text-xs sm:text-sm"></dd>
+            </div>
           </dl>
         </div>
 
-        <!-- Pre-flight -->
-        <div class="bg-white rounded-2xl border-2 border-blue-200 p-6">
+        <!-- Pre-flight Checklist Card -->
+        <div class="bg-white rounded-2xl border-2 border-emerald-200/90 p-6 shadow-xs">
           <div class="flex items-center justify-between flex-wrap gap-2 mb-1">
             <div class="flex items-center gap-2">
-              <i data-lucide="plane-takeoff" class="w-5 h-5 text-blue-600"></i>
-              <h3 class="text-lg font-bold">Pre-Flight Document Checklist</h3>
+              <i data-lucide="plane-takeoff" class="w-5 h-5 text-emerald-700"></i>
+              <h3 class="text-lg font-bold text-stone-900">Pre-Flight Document Checklist</h3>
             </div>
-            <button onclick="showVault()" class="text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg px-2.5 py-1 flex items-center gap-1 transition">
+            <button onclick="showVault()" class="text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg px-2.5 py-1 flex items-center gap-1 transition">
               <i data-lucide="folder-lock" class="w-3.5 h-3.5"></i> Open My Vault
             </button>
           </div>
-          <p class="text-sm text-slate-500 mb-4">Tick what you already have ready (scanned and under size limit). Documents from your <b>Digital Vault</b> are automatically checked.</p>
+          <p class="text-xs text-stone-500 mb-4">Tick what you already have ready (scanned and under size limit). Documents from your <b>Digital Vault</b> are automatically checked.</p>
 
-          <div class="flex items-center justify-between text-sm mb-1">
-            <span class="font-semibold">Readiness audit</span><span id="pText" class="font-semibold text-slate-600">0%</span>
+          <div class="flex items-center justify-between text-xs sm:text-sm mb-1.5 font-semibold">
+            <span class="text-stone-700">Readiness audit</span><span id="pText" class="text-emerald-800 font-bold">0%</span>
           </div>
-          <div class="h-3 rounded-full bg-slate-100 overflow-hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="pBar" aria-valuenow="0">
-            <div id="pFill" class="h-full bg-amber-400 transition-all duration-500" style="width:0%"></div>
+          <div class="h-3 rounded-full bg-stone-200 overflow-hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="pBar" aria-valuenow="0">
+            <div id="pFill" class="h-full bg-amber-500 transition-all duration-500" style="width:0%"></div>
           </div>
-          <p id="pMsg" class="text-sm mt-2 text-slate-600"></p>
+          <p id="pMsg" class="text-xs sm:text-sm mt-2 text-stone-600 font-medium"></p>
 
-          <h4 class="mt-5 mb-2 text-xs font-bold uppercase tracking-wide text-rose-600 flex items-center gap-1"><i data-lucide="alert-circle" class="w-4 h-4"></i> Mandatory</h4>
+          <h4 class="mt-5 mb-2 text-xs font-bold uppercase tracking-wide text-rose-700 flex items-center gap-1.5">
+            <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Mandatory Documents
+          </h4>
           <ul id="mList" class="space-y-2"></ul>
-          <h4 class="mt-5 mb-2 text-xs font-bold uppercase tracking-wide text-slate-500 flex items-center gap-1"><i data-lucide="circle-dashed" class="w-4 h-4"></i> Optional / situational</h4>
+
+          <h4 class="mt-5 mb-2 text-xs font-bold uppercase tracking-wide text-stone-500 flex items-center gap-1.5">
+            <i data-lucide="circle-dashed" class="w-3.5 h-3.5"></i> Optional / Situational Documents
+          </h4>
           <ul id="oList" class="space-y-2"></ul>
 
           <div class="mt-6 flex flex-col sm:flex-row gap-3">
-            <button onclick="startApp()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl py-3.5 flex items-center justify-center gap-2 transition shadow-sm">
+            <button onclick="startApp()" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold rounded-xl py-3.5 flex items-center justify-center gap-2 transition shadow-sm">
               <i data-lucide="badge-check" class="w-5 h-5"></i> Verify Documents &amp; Start Application
             </button>
-            <button onclick="openAI()" class="sm:w-auto border border-blue-300 text-blue-700 hover:bg-blue-50 font-semibold rounded-xl px-5 py-3.5 flex items-center justify-center gap-2 transition">
-              <i data-lucide="sparkles" class="w-5 h-5"></i> Ask AI
+            <button onclick="openAI()" class="sm:w-auto border border-emerald-300 text-emerald-800 hover:bg-emerald-50 font-semibold rounded-xl px-5 py-3.5 flex items-center justify-center gap-2 transition">
+              <i data-lucide="sparkles" class="w-5 h-5"></i> Ask AI Assistant
             </button>
           </div>
-          <p id="startMsg" class="text-sm mt-3 hidden" role="status"></p>
+          <p id="startMsg" class="text-xs sm:text-sm mt-3 hidden" role="status"></p>
         </div>
       </div>
 
       <!-- Sidebar -->
       <aside class="space-y-6">
-        <!-- AI -->
-        <div id="aiBox" class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-          <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-3 flex items-center gap-2">
-            <i data-lucide="bot" class="w-5 h-5"></i><div><p class="font-semibold leading-tight">Sync Assistant</p><p class="text-xs text-blue-100">Missing a document? Tell me.</p></div>
+        <!-- AI Chatbot Assistant -->
+        <div id="aiBox" class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs">
+          <div class="bg-gradient-to-r from-emerald-850 to-zinc-900 text-white px-5 py-3.5 flex items-center gap-2.5">
+            <i data-lucide="bot" class="w-5 h-5 text-emerald-300"></i>
+            <div>
+              <p class="font-semibold text-sm leading-tight text-stone-50">Sync Assistant</p>
+              <p class="text-[11px] text-emerald-200">Missing a document? Ask for legal substitutes.</p>
+            </div>
           </div>
-          <div id="chat" class="p-4 h-72 overflow-y-auto space-y-3 text-sm" aria-live="polite"></div>
-          <div class="px-4 pb-2 flex flex-wrap gap-2" id="chips"></div>
-          <form onsubmit="sendChat(event)" class="p-3 border-t border-slate-100 flex gap-2">
-            <input id="chatIn" class="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-600 focus:outline-none" placeholder="e.g. I don't have a birth certificate" aria-label="Message">
-            <button class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-3 transition" aria-label="Send"><i data-lucide="send" class="w-4 h-4"></i></button>
+          <div id="chat" class="p-4 h-72 overflow-y-auto space-y-3 text-xs sm:text-sm" aria-live="polite"></div>
+          <div class="px-4 pb-2 flex flex-wrap gap-1.5" id="chips"></div>
+          <form onsubmit="sendChat(event)" class="p-3 border-t border-stone-100 flex gap-2">
+            <input id="chatIn" class="flex-1 rounded-xl border border-stone-300 px-3 py-2 text-xs focus:border-emerald-700 focus:outline-none" placeholder="e.g. I don't have a birth certificate" aria-label="Message">
+            <button class="bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl px-3 transition flex items-center justify-center" aria-label="Send">
+              <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
           </form>
         </div>
 
-        <!-- Helpline -->
-        <div id="help" class="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 shadow-sm">
-          <h3 class="font-bold flex items-center gap-2 text-emerald-800"><i data-lucide="phone-call" class="w-5 h-5"></i> Helpline</h3>
-          <p class="text-sm text-emerald-900 mt-1">Can’t find a substitute? Call and ask the department directly.</p>
-          <a id="dHelp" href="tel:" class="mt-3 block text-center bg-white border border-emerald-300 rounded-xl py-2.5 font-bold text-emerald-700 text-lg hover:bg-emerald-100 transition"></a>
-          <p class="text-[11px] text-emerald-800/70 mt-2">Placeholder numbers – replace with verified official helplines.</p>
+        <!-- Helpline Card -->
+        <div id="help" class="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-5 shadow-xs">
+          <h3 class="font-bold flex items-center gap-2 text-emerald-900 text-sm">
+            <i data-lucide="phone-call" class="w-4 h-4 text-emerald-700"></i> Official Helpline
+          </h3>
+          <p class="text-xs text-emerald-800/90 mt-1">Can’t find a substitute? Call and ask the department directly.</p>
+          <a id="dHelp" href="tel:" class="mt-3 block text-center bg-white border border-emerald-300 rounded-xl py-2.5 font-bold text-emerald-800 text-base hover:bg-emerald-100 transition shadow-2xs"></a>
+          <p class="text-[10px] text-emerald-800/70 mt-2">Verified official department numbers – always confirm on official portal.</p>
         </div>
 
-        <!-- Tools -->
-        <div id="tools" class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
-          <h3 class="font-bold flex items-center gap-2"><i data-lucide="file-down" class="w-5 h-5 text-blue-600"></i> Built-in Compressor</h3>
-          <p class="text-sm text-slate-500 mt-1">Shrink photos &amp; signatures to fit portal limits. Nothing leaves your device.</p>
-          <label class="mt-3 block border-2 border-dashed border-slate-300 hover:border-blue-400 rounded-xl p-4 text-center text-sm cursor-pointer transition">
-            <i data-lucide="upload-cloud" class="w-6 h-6 mx-auto text-slate-400"></i>
-            <span class="block mt-1 font-medium text-slate-700">Choose JPG / PNG image</span>
+        <!-- Tools: Image Compressor -->
+        <div id="tools" class="bg-white rounded-2xl border border-stone-200 p-5 shadow-xs">
+          <h3 class="font-bold flex items-center gap-2 text-sm text-stone-900">
+            <i data-lucide="file-down" class="w-4 h-4 text-emerald-700"></i> Built-in Photo Compressor
+          </h3>
+          <p class="text-xs text-stone-500 mt-1">Shrink photos &amp; signatures to meet 50KB/100KB limits. Processed completely in-browser on your device.</p>
+          <label class="mt-3 block border-2 border-dashed border-stone-300 hover:border-emerald-600 rounded-xl p-4 text-center text-xs cursor-pointer transition bg-stone-50/50 hover:bg-emerald-50/30">
+            <i data-lucide="upload-cloud" class="w-6 h-6 mx-auto text-stone-400 mb-1"></i>
+            <span class="block font-medium text-stone-700">Choose JPG / PNG photo or sign</span>
             <input id="imgIn" type="file" accept="image/*" class="sr-only" onchange="compress(this.files[0])">
           </label>
-          <label class="block text-xs mt-3 text-slate-600">Quality: <span id="qVal" class="font-semibold text-blue-600">60</span>%
-            <input id="q" type="range" min="20" max="90" value="60" class="w-full accent-blue-600 mt-1" oninput="qVal.textContent=this.value;if(window._f)compress(window._f)">
+          <label class="block text-xs mt-3 text-stone-600 font-medium">Quality Target: <span id="qVal" class="font-bold text-emerald-800">60</span>%
+            <input id="q" type="range" min="20" max="90" value="60" class="w-full accent-emerald-700 mt-1" oninput="qVal.textContent=this.value;if(window._f)compress(window._f)">
           </label>
-          <div id="cOut" class="mt-3 text-sm hidden"></div>
-          <button disabled class="mt-3 w-full text-sm rounded-lg bg-slate-100 text-slate-500 py-2 cursor-not-allowed" title="Server-side in full product">PDF compression – coming soon</button>
+          <div id="cOut" class="mt-3 text-xs hidden"></div>
+          <button disabled class="mt-3 w-full text-xs rounded-xl bg-stone-100 text-stone-400 py-2 cursor-not-allowed font-medium" title="Client-side PDF compression is planned for v2">PDF compression – coming soon</button>
         </div>
       </aside>
     </div>
@@ -171,29 +222,29 @@
 
 </main>
 
-<footer class="border-t border-slate-200 bg-white mt-auto py-6 text-center text-xs text-slate-500 px-4">
-  ScholarSync is an independent aggregator, not a government website. Always verify dates, rules and documents on the official portal.
+<footer class="border-t border-stone-200 bg-white mt-auto py-6 text-center text-xs text-stone-500 px-4">
+  Yojna Sathi is an independent educational and utility aggregator, not an official government portal. Always verify dates, rules, and documents on official portals.
 </footer>
 
 <!-- AUTH MODAL (LOGIN / SIGNUP) -->
-<div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm hidden" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-  <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 w-full max-w-md overflow-hidden fade">
+<div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-xs hidden" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+  <div class="bg-white rounded-3xl shadow-2xl border border-stone-100 w-full max-w-md overflow-hidden fade">
     <!-- Modal Header -->
-    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 relative">
+    <div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-zinc-900 text-white p-6 relative">
       <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-white/80 hover:text-white p-1 rounded-full hover:bg-white/10 transition" aria-label="Close modal">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
-      <div class="flex items-center gap-1.5 text-blue-200 text-xs font-semibold uppercase tracking-wider mb-1">
+      <div class="flex items-center gap-1.5 text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-1">
         <i data-lucide="shield-check" class="w-4 h-4 text-emerald-300"></i> Secure Student Access
       </div>
-      <h3 id="authTitle" class="text-2xl font-bold">Sign in to ScholarSync</h3>
-      <p class="text-blue-100 text-xs mt-1">Access your Digital Vault, saved documents, and application packs.</p>
+      <h3 id="authTitle" class="text-2xl font-bold">Sign in to Yojna Sathi</h3>
+      <p class="text-stone-300 text-xs mt-1">Access your Digital Vault, saved documents, and application packs.</p>
     </div>
 
     <!-- Tab Selector -->
-    <div class="flex border-b border-slate-200 text-sm font-semibold">
-      <button id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-3 border-b-2 border-blue-600 text-blue-600 font-bold transition">Sign In</button>
-      <button id="tabSignup" onclick="switchAuthTab('signup')" class="flex-1 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition">Create Account</button>
+    <div class="flex border-b border-stone-200 text-sm font-semibold">
+      <button id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-3 border-b-2 border-emerald-700 text-emerald-800 font-bold transition">Sign In</button>
+      <button id="tabSignup" onclick="switchAuthTab('signup')" class="flex-1 py-3 border-b-2 border-transparent text-stone-500 hover:text-stone-800 transition">Create Account</button>
     </div>
 
     <!-- Modal Body -->
@@ -201,28 +252,28 @@
       <div id="authAlert" class="hidden text-xs p-3 rounded-xl border"></div>
 
       <!-- Config Notice (shown if default placeholder keys) -->
-      <div id="authConfigNotice" class="text-xs bg-amber-50 text-amber-800 border border-amber-200 rounded-xl p-3 flex items-start gap-2 hidden">
-        <i data-lucide="info" class="w-4 h-4 shrink-0 text-amber-600 mt-0.5"></i>
-        <span>Supabase keys not yet configured in <code class="bg-amber-100 px-1 py-0.5 rounded font-mono">config.js</code>. Demo mode is active for testing.</span>
+      <div id="authConfigNotice" class="text-xs bg-amber-50 text-amber-900 border border-amber-200 rounded-xl p-3 flex items-start gap-2 hidden">
+        <i data-lucide="info" class="w-4 h-4 shrink-0 text-amber-700 mt-0.5"></i>
+        <span>Supabase keys not yet configured in <code class="bg-amber-100 px-1 py-0.5 rounded font-mono">config.js</code>. Demo mode is active for immediate testing.</span>
       </div>
 
       <!-- Sign In Form -->
       <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
         <div>
-          <label for="loginEmail" class="block text-xs font-semibold text-slate-700 mb-1">Student Email Address</label>
+          <label for="loginEmail" class="block text-xs font-semibold text-stone-700 mb-1">Student Email Address</label>
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i data-lucide="mail" class="w-4 h-4"></i></span>
-            <input type="email" id="loginEmail" required placeholder="student@example.com" class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-blue-600 focus:outline-none">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"><i data-lucide="mail" class="w-4 h-4"></i></span>
+            <input type="email" id="loginEmail" required placeholder="student@example.com" class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-stone-300 text-xs sm:text-sm focus:border-emerald-700 focus:outline-none">
           </div>
         </div>
         <div>
-          <label for="loginPassword" class="block text-xs font-semibold text-slate-700 mb-1">Password</label>
+          <label for="loginPassword" class="block text-xs font-semibold text-stone-700 mb-1">Password</label>
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i data-lucide="lock" class="w-4 h-4"></i></span>
-            <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-blue-600 focus:outline-none">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"><i data-lucide="lock" class="w-4 h-4"></i></span>
+            <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-stone-300 text-xs sm:text-sm focus:border-emerald-700 focus:outline-none">
           </div>
         </div>
-        <button type="submit" id="loginSubmitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-sm">
+        <button type="submit" id="loginSubmitBtn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-semibold py-3 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm">
           <span>Sign In</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
@@ -231,36 +282,36 @@
       <!-- Sign Up Form -->
       <form id="signupForm" onsubmit="handleSignup(event)" class="space-y-4 hidden">
         <div>
-          <label for="signupName" class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+          <label for="signupName" class="block text-xs font-semibold text-stone-700 mb-1">Full Name</label>
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i data-lucide="user" class="w-4 h-4"></i></span>
-            <input type="text" id="signupName" required placeholder="Ananya Roy" class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-blue-600 focus:outline-none">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"><i data-lucide="user" class="w-4 h-4"></i></span>
+            <input type="text" id="signupName" required placeholder="Ananya Roy" class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-stone-300 text-xs sm:text-sm focus:border-emerald-700 focus:outline-none">
           </div>
         </div>
         <div>
-          <label for="signupEmail" class="block text-xs font-semibold text-slate-700 mb-1">Email Address</label>
+          <label for="signupEmail" class="block text-xs font-semibold text-stone-700 mb-1">Email Address</label>
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i data-lucide="mail" class="w-4 h-4"></i></span>
-            <input type="email" id="signupEmail" required placeholder="student@example.com" class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-blue-600 focus:outline-none">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"><i data-lucide="mail" class="w-4 h-4"></i></span>
+            <input type="email" id="signupEmail" required placeholder="student@example.com" class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-stone-300 text-xs sm:text-sm focus:border-emerald-700 focus:outline-none">
           </div>
         </div>
         <div>
-          <label for="signupPassword" class="block text-xs font-semibold text-slate-700 mb-1">Password</label>
+          <label for="signupPassword" class="block text-xs font-semibold text-stone-700 mb-1">Password</label>
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i data-lucide="lock" class="w-4 h-4"></i></span>
-            <input type="password" id="signupPassword" required minlength="6" placeholder="Min. 6 characters" class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:border-blue-600 focus:outline-none">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"><i data-lucide="lock" class="w-4 h-4"></i></span>
+            <input type="password" id="signupPassword" required minlength="6" placeholder="Min. 6 characters" class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-stone-300 text-xs sm:text-sm focus:border-emerald-700 focus:outline-none">
           </div>
         </div>
-        <button type="submit" id="signupSubmitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-sm">
+        <button type="submit" id="signupSubmitBtn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-semibold py-3 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm">
           <span>Create Student Account</span>
           <i data-lucide="user-plus" class="w-4 h-4"></i>
         </button>
       </form>
 
       <!-- Quick Demo Login Option -->
-      <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+      <div class="pt-2 border-t border-stone-100 flex items-center justify-between text-xs text-stone-500">
         <span>Quick Test (No DB setup required):</span>
-        <button type="button" onclick="quickDemoLogin()" class="text-blue-600 font-semibold hover:underline">Use Demo Account</button>
+        <button type="button" onclick="quickDemoLogin()" class="text-emerald-800 font-semibold hover:underline">Use Demo Account</button>
       </div>
     </div>
   </div>
@@ -273,6 +324,4 @@
 <script src="vault.js"></script>
 <script src="script.js"></script>
 </body>
-</html>
-
 </html>

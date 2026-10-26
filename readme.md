@@ -32,7 +32,7 @@
 
 **Yojna Sathi** (ScholarSync) is a student-centric scholarship and government scheme aggregator designed to eliminate the **"Form-Filling Blindspot"**. 
 
-In most government scholarship portals (such as SVMCM, Kanyashree, Aikyashree, and OASIS), required documents, formatting restrictions, and specific proofs are only revealed midway through multi-page, timed application sessions. Students frequently abandon sessions halfway through because they lack a required document or certificate.
+In major regional government scholarship portals across **West Bengal**, **Assam**, and **Sikkim** (such as SVMCM, OASIS, Aikyashree, Nabanna, Pragyan Bharti, and Sikkim State Merit), required documents, formatting restrictions, and specific proofs are only revealed midway through multi-page, timed application sessions. Students frequently abandon sessions halfway through because they lack a required document or certificate.
 
 ### Unique Selling Points (USPs)
 
@@ -200,18 +200,22 @@ npx serve .
   id: "svmcm",                              // Unique scheme identifier
   name: "Swami Vivekananda Merit-cum-Means",// Official title
   short: "SVMCM",                           // Abbreviation
-  dept: "Dept. of Higher Education",        // Government department
+  state: "West Bengal",                     // Governing State ("West Bengal" | "Assam" | "Sikkim")
+  stateCode: "WB",                          // State Code ("WB" | "AS" | "SK")
+  category: "Education",                    // Scheme Category (e.g. Caste Welfare, Youth Merit)
+  dept: "Dept. of Higher Education, WB",    // Government department
   icon: "award",                            // Lucide icon name
-  color: "bg-blue-600",                     // Tailwind badge/logo color
+  color: "bg-emerald-800",                  // Tailwind logo background color
   status: "open",                           // "open" | "closing" | "soon"
-  window: "Typically Aug – Nov (yearly)",   // Application window description
+  window: "July to November annually",      // Typical timeline
   deadline: "Check portal – usually early Nov",
-  elig: "West Bengal resident, merit + income criteria",
-  mode: "Online",                           // "Online" | "Offline" | "Online + Offline"
-  helpline: "1800-000-0000",
+  target: "Class 11, 12, Undergrad, Postgrad, Doctoral students",
+  elig: "WB domicile, family income ≤ ₹2.5 Lakh/year, min 60% marks",
+  mode: "Online",                           // "Online" | "Offline" | "School Route" | "Departmental"
+  helpline: "1800-102-8014",
   docs: [
-    ["Aadhaar card", "m"],                  // "m" = Mandatory
-    ["Caste certificate", "o"]              // "o" = Optional / Situational
+    ["Qualifying mark sheet (both sides)", "m"], // "m" = Mandatory
+    ["Caste certificate (SC/ST/OBC)", "o"]       // "o" = Optional / Situational
   ]
 }
 ```
